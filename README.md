@@ -1,31 +1,20 @@
-# Lume Fotografia
+# Lume — projeto restaurado para prévia no AI Studio
 
-Site estático responsivo, preparado para a Vercel. HTML, CSS e JavaScript, sem dependências e sem build.
+O visual original está em `dist`. Essa pasta é o código-fonte do site, não uma saída descartável.
 
-## Publicar na Vercel
+## Google AI Studio
 
-1. Importe o repositório `luizmk7/fotografo`.
-2. Mantenha Root Directory na raiz do repositório (`./`).
-3. Framework Preset: **Other**.
-4. Output Directory: **dist**.
-5. Build Command e Install Command: vazios.
-6. Clique em Deploy.
+Importe o projeto e execute `npm run dev`. O servidor usa Node.js sem dependências, escuta em 0.0.0.0 e usa PORT ou 3000. Não é necessário recriar o site ou converter para React/Tailwind.
 
-O arquivo `vercel.json` já define as opções de framework, saída e comandos. Não selecione Express.
+Instrução sugerida ao importar:
+“Execute o site existente com npm run dev. Preserve integralmente HTML, CSS, JavaScript e as imagens em dist. Não recrie o layout e não substitua conteúdo. Se houver erro na prévia, corrija apenas a execução ou os caminhos dos arquivos.”
 
-## Arquivos
+A execução HTTP foi conferida localmente. A importação dentro da sua conta do AI Studio ainda precisa ser conferida.
 
-- `dist/index.html`: página e conteúdo.
-- `dist/assets/`: todas as imagens locais.
-- `dist/styles.css` e `dist/refinements.css`: visual e responsividade.
-- `dist/script.js` e `dist/refinements.js`: galerias, formulário e animações.
+## Vercel
 
-## Antes da divulgação
+Root Directory: ./; Framework: Other; Output Directory: dist; comandos de instalação e build vazios. vercel.json já contém essas configurações.
 
-Configure `WHATSAPP_NUMBER` em `dist/script.js` com DDI e DDD, somente números. Enquanto vazio, o formulário abre uma mensagem compartilhável sem destinatário definido.
+## Conteúdo
 
-Imagens, galerias, equipamentos e preços demonstrativos foram preservados do projeto. Substitua-os por conteúdo real. As galerias usam fotos da mesma categoria, não álbuns reais individuais.
-
-## Executar localmente
-
-Na raiz do projeto, execute `python3 -m http.server 8000 --directory dist` e abra http://localhost:8000.
+Configure WHATSAPP_NUMBER em dist/script.js. Imagens, galerias, equipamentos e valores demonstrativos foram preservados e devem ser substituídos por informações reais antes da divulgação comercial.
