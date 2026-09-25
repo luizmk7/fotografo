@@ -4,17 +4,25 @@
  if (!reduced.matches) document.documentElement.classList.add('motion-ready');
  document.querySelectorAll('.plans .reveal').forEach((el,i)=>el.style.setProperty('--reveal-delay',`${i*85}ms`));
  document.querySelectorAll('.portfolio-row').forEach(row=>{
-   const track=row.querySelector('.category-track'), cards=[...track.children], status=row.querySelector('.track-status');
+   const track=row.querySelector('.category-track'), cards=[...track.children], dots=[...row.querySelectorAll('.carousel-dots .dot')];
    function update(){
      const start=track.getBoundingClientRect().left+parseFloat(getComputedStyle(track).paddingLeft);
      let index=0; cards.forEach((card,i)=>{if(Math.abs(card.getBoundingClientRect().left-start)<Math.abs(cards[index].getBoundingClientRect().left-start))index=i});
      const max=track.scrollWidth-track.clientWidth;
-     row.querySelector('.category-prev').disabled=track.scrollLeft<3;
-     row.querySelector('.category-next').disabled=track.scrollLeft>=max-3;
-     status.firstChild.textContent=max<3?'04 HISTÓRIAS ':`${String(index+1).padStart(2,'0')} — 04 `;
-     status.lastChild.textContent=max<3?'EXPLORE AS GALERIAS':'DESLIZE PARA EXPLORAR';
-     status.style.setProperty('--track-progress',`${max<3?100:(index+1)*25}%`);
+     const prevBtn=row.querySelector('.category-prev'), nextBtn=row.querySelector('.category-next');
+     if(prevBtn) prevBtn.disabled=track.scrollLeft<3;
+     if(nextBtn) nextBtn.disabled=track.scrollLeft>=max-3;
+     dots.forEach((dot,i)=>{
+       const isActive=i===index;
+       dot.classList.toggle('active',isActive);
+       dot.setAttribute('aria-selected',String(isActive));
+     });
    }
+   dots.forEach((dot,i)=>{
+     dot.addEventListener('click',()=>{
+       track.scrollTo({left:cards[i].offsetLeft-cards[0].offsetLeft,behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'instant':'smooth'});
+     });
+   });
    let pending=false;track.addEventListener('scroll',()=>{if(!pending){pending=true;requestAnimationFrame(()=>{update();pending=false})}},{passive:true});
    new ResizeObserver(update).observe(track);update();
  });
